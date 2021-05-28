@@ -1,0 +1,24 @@
+version: '3.2'
+services:
+  app:
+    container_name: demo
+    image: demo
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - 'SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/social_network'
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=social_network
+  db:
+    image: postgres
+    container_name: db
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=social_network
